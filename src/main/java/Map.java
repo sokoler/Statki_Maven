@@ -39,14 +39,14 @@ public class Map {
         int row = s.getRow();
         int col = s.getCol();
         int length = s.getLength();
-        int dir = s.getDirection();
+        Direction direction = s.getDirection();
 
-        if (dir == 0) // Hortizontal
+        if (direction == Direction.HORIZONTAL) // Hortizontal
         {
             for (int i = col; i < col + length; i++) {
                 map[row][i].setShip(true);
             }
-        } else if (dir == 1) // Vertical
+        } else if (direction == Direction.VERTICAL) // Vertical
         {
             for (int i = row; i < row + length; i++) {
                 map[i][col].setShip(true);
@@ -92,5 +92,13 @@ public class Map {
 
     public int getPointsToWin() {
         return pointsToWin;
+    }
+
+    public Square[][] getMap() {
+        return map;
+    }
+
+    public void setMap(Square[][] map) {
+        this.map = map;
     }
 }
