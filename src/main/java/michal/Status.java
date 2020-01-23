@@ -1,3 +1,5 @@
+package michal;
+
 public enum Status {
     MISSED("#"),
     HIT("X"),

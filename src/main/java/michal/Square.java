@@ -1,21 +1,20 @@
+package michal;
+
 public class Square {
 
     private boolean ship;
     private Status status;
 
-    public Square()
-    {
+    public Square() {
         status = Status.NOT_SET;
         ship = false;
     }
 
-    public void markHit()
-    {
+    public void markHit() {
         setStatus(Status.HIT);
     }
 
-    public void markMiss()
-    {
+    public void markMiss() {
         setStatus(Status.MISSED);
     }
 
@@ -37,6 +36,6 @@ public class Square {
 
     @Override
     public String toString() {
-        return "|"+ getStatus().toString() +"|";
+        return "|" + getStatus().toString() + "|";
     }
 }

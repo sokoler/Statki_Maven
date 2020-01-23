@@ -1,4 +1,6 @@
-import java.util.*;
+package michal;
+
+import java.util.Scanner;
 
 public class Game {
 
@@ -6,11 +8,16 @@ public class Game {
     private static int counterOfMisses = 0;
     private static int counterOfHits = 0;
 
-    public static void startApp() {
+    public int mapLength;
+    public Map map;
+    private Setup setup;
+    private Ship[] ships;
 
-        Setup.setupGame();
+    public void startApp() {
+
+        setup = new Setup(mapLength, map, ships);
+        setup.setupGame();
         checkUserAnswer();
-
     }
 
     public static int scan() {
@@ -18,20 +25,23 @@ public class Game {
         return scanner.nextInt();
     }
 
-    public static void checkUserAnswer() {
+    public void checkUserAnswer() {
 
         while (true) {
 
-            int col = -1, row = -1;
+            int col = -1;
+            int row = -1;
 
             System.out.print("Enter X coordinate: ");
             col = scan();
             System.out.print("Enter Y coordinate: ");
             row = scan();
 
-            guess(col , row);
+            guess(col, row, setup);
 
-            if (Setup.map.isWin()) {
+            setup.getMap().printMap();
+
+            if (setup.getMap().isWin()) {
                 System.out.println("YOU WON");
                 System.out.println("\n Number of shots : " + counterOfShots);
                 System.out.println("\n Number of hits : " + counterOfHits);
@@ -41,30 +51,28 @@ public class Game {
         }
     }
 
-    public static void guess(int col, int row) {
+    public void guess(int col, int row, Setup setup) {
 
-        if ((col >= 0 && col < Setup.mapLength) && (row >= 0 && row < Setup.mapLength)) {
+        if ((col >= 0 && col < setup.getMapLength()) && (row >= 0 && row < setup.getMapLength())) {
 
             counterOfShots++;
-            if (Setup.map.isShotHere(row, col)) {
+            if (setup.getMap().isShotHere(row, col)) {
                 System.out.println(" YOU ALREADY HIT HERE !");
-            } else if (Setup.map.hasShip(row, col)) {
+            } else if (setup.getMap().hasShip(row, col)) {
                 {
                     counterOfHits++;
-                    Setup.map.markHit(row, col);
+                    setup.getMap().markHit(row, col);
                     System.out.println(" YOU HIT AT " + col + "," + row);
                 }
             } else {
                 counterOfMisses++;
-                Setup.map.markMiss(row, col);
+                setup.getMap().markMiss(row, col);
                 System.out.println(" YOU MISSED AT " + col + "," + row);
             }
 
         } else {
             System.out.println("Invalid location!");
         }
-
-        Setup.map.printMap();
 
     }
 

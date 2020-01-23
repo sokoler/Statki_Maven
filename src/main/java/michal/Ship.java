@@ -1,3 +1,5 @@
+package michal;
+
 public class Ship {
 
     private int row;

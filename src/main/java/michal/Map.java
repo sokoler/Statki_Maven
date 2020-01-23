@@ -1,38 +1,37 @@
+package michal;
+
 public class Map {
 
-    private Square[][] map;
+    private Square[][] field;
     private int points;
     private int pointsToWin;
 
     public Map(int number) {
-        map = new Square[number][number];
+        field = new Square[number][number];
 
-        for (int row = 0; row < map.length; row++) {
-            for (int col = 0; col < map[row].length; col++) {
+        for (int row = 0; row < field.length; row++) {
+            for (int col = 0; col < field[row].length; col++) {
                 Square temp = new Square();
-                map[row][col] = temp;
+                field[row][col] = temp;
             }
         }
     }
 
     public boolean isShotHere(int row, int col) {
-        if (map[row][col].getStatus() == Status.HIT || map[row][col].getStatus() == Status.MISSED) {
-            return true;
-        }
-        return false;
+        return field[row][col].getStatus() == Status.HIT || field[row][col].getStatus() == Status.MISSED;
     }
 
     public void markHit(int row, int col) {
-        map[row][col].markHit();
+        field[row][col].markHit();
         points++;
     }
 
     public void markMiss(int row, int col) {
-        map[row][col].markMiss();
+        field[row][col].markMiss();
     }
 
     public boolean hasShip(int row, int col) {
-        return map[row][col].isShip();
+        return field[row][col].isShip();
     }
 
     public void addShip(Ship s) {
@@ -41,25 +40,20 @@ public class Map {
         int length = s.getLength();
         Direction direction = s.getDirection();
 
-        if (direction == Direction.HORIZONTAL)
-        {
+        if (direction == Direction.HORIZONTAL) {
             for (int i = col; i < col + length; i++) {
-                map[row][i].setShip(true);
+                field[row][i].setShip(true);
             }
-        } else if (direction == Direction.VERTICAL)
-        {
+        } else if (direction == Direction.VERTICAL) {
             for (int i = row; i < row + length; i++) {
-                map[i][col].setShip(true);
+                field[i][col].setShip(true);
             }
         }
     }
 
     public boolean isWin() {
 
-        if (points >= pointsToWin)
-            return true;
-        else
-            return false;
+        return points >= pointsToWin;
     }
 
     public void setPointsToWin(Ship[] ships) {
@@ -73,18 +67,18 @@ public class Map {
     public void printMap() {
 
         System.out.println();
-        for (int i = 0; i < map.length; i++)
+        for (int i = 0; i < field.length; i++)
             System.out.print("  " + i);
         System.out.println();
 
-        for (int x = 0; x < map.length; x++) {
+        for (int x = 0; x < field.length; x++) {
             if (x <= 9)
                 System.out.print(" " + x);
             else
                 System.out.print(x);
 
-            for (int y = 0; y < map[x].length; y++) {
-                System.out.print(map[x][y]);
+            for (int y = 0; y < field[x].length; y++) {
+                System.out.print(field[x][y]);
             }
             System.out.println(x);
         }
@@ -95,10 +89,10 @@ public class Map {
     }
 
     public Square[][] getMap() {
-        return map;
+        return field;
     }
 
     public void setMap(Square[][] map) {
-        this.map = map;
+        this.field = map;
     }
 }

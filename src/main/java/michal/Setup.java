@@ -1,17 +1,30 @@
+package michal;
+
 import java.util.*;
 
 public class Setup {
 
-    public static Ship[] ships;
-    public static int mapLength;
-    public static Map map;
+    private Ship[] ships;
+    private int mapLength;
+    private Map map;
+    public Validator validator;
 
     private static final List<Direction> VALUES =
             Collections.unmodifiableList(Arrays.asList(Direction.values()));
     private static final int SIZE = VALUES.size();
     private static final Random RANDOM = new Random();
 
-    public static void setupGame() {
+    private Setup() {
+        throw new IllegalStateException("Utility class");
+    }
+
+    public Setup(int mapLength, Map map, Ship[] ships) {
+        this.mapLength = mapLength;
+        this.map = map;
+        this.ships = ships;
+    }
+
+    public void setupGame() {
 
         setSizeOfMap();
 
@@ -20,15 +33,15 @@ public class Setup {
         setEachShipLength();
 
         setupShips();
-    }
 
+    }
 
     public static int scan() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
-    public static void setEachShipLength() {
+    public void setEachShipLength() {
         for (int i = 0; i < ships.length; i++) {
             int[] shipsLength = new int[ships.length];
             do {
@@ -41,14 +54,15 @@ public class Setup {
         map.setPointsToWin(ships);
     }
 
-    public static void setShipsAmount() {
+    public void setShipsAmount() {
         do {
             System.out.println("Enter ships amount (between 1 to 10)");
             ships = new Ship[scan()];
         } while (ships.length < 1 || ships.length > 10);
     }
 
-    public static void setSizeOfMap() {
+    public void setSizeOfMap() {
+
         do {
             System.out.println("Enter the size of the map (between 10 to 20)");
             mapLength = scan();
@@ -56,10 +70,12 @@ public class Setup {
         map = new Map(mapLength);
     }
 
-    public static void setupShips() {
+    public void setupShips() {
 
         int counter = 0;
         int normalCounter = 1;
+
+        validator = new Validator(map);
 
         do {
             for (Ship s : ships) {
@@ -71,7 +87,7 @@ public class Setup {
                 int col = RANDOM.nextInt(mapLength);
                 Direction direction = VALUES.get(RANDOM.nextInt(SIZE));
 
-                while (Validator.isShipWronglyPlaced(row, col, direction, length)) {
+                while (validator.isShipWronglyPlaced(row, col, direction, length, mapLength)) {
 
                     row = RANDOM.nextInt(mapLength);
                     col = RANDOM.nextInt(mapLength);
@@ -88,4 +104,19 @@ public class Setup {
         while (counter == ships.length - 1);
     }
 
+    public int getMapLength() {
+        return mapLength;
+    }
+
+    public void setMapLength(int mapLength) {
+        this.mapLength = mapLength;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
 }
