@@ -1,25 +1,22 @@
 public class Square {
 
-    private static final String HIT = "X";
-    private static final String MISSED = "#";
-
     private boolean ship;
-    private String status;
+    private Status status;
 
     public Square()
     {
-        status =" ";
+        status = Status.NOT_SET;
         ship = false;
     }
 
     public void markHit()
     {
-        setStatus(HIT);
+        setStatus(Status.HIT);
     }
 
     public void markMiss()
     {
-        setStatus(MISSED);
+        setStatus(Status.MISSED);
     }
 
     public boolean isShip() {
@@ -30,16 +27,16 @@ public class Square {
         this.ship = ship;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return "|"+ getStatus() +"|";
+        return "|"+ getStatus().toString() +"|";
     }
 }

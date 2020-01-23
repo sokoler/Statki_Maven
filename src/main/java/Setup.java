@@ -23,10 +23,6 @@ public class Setup {
     }
 
 
-    public static Direction randomDirection() {
-        return VALUES.get(RANDOM.nextInt(SIZE));
-    }
-
     public static int scan() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();

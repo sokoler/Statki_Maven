@@ -16,7 +16,7 @@ public class Map {
     }
 
     public boolean isShotHere(int row, int col) {
-        if (map[row][col].getStatus().equals("X") || map[row][col].getStatus().equals("#")) {
+        if (map[row][col].getStatus() == Status.HIT || map[row][col].getStatus() == Status.MISSED) {
             return true;
         }
         return false;
@@ -41,12 +41,12 @@ public class Map {
         int length = s.getLength();
         Direction direction = s.getDirection();
 
-        if (direction == Direction.HORIZONTAL) // Hortizontal
+        if (direction == Direction.HORIZONTAL)
         {
             for (int i = col; i < col + length; i++) {
                 map[row][i].setShip(true);
             }
-        } else if (direction == Direction.VERTICAL) // Vertical
+        } else if (direction == Direction.VERTICAL)
         {
             for (int i = row; i < row + length; i++) {
                 map[i][col].setShip(true);

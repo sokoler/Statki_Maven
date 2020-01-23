@@ -22,7 +22,14 @@ public class Game {
 
         while (true) {
 
-            guess();
+            int col = -1, row = -1;
+
+            System.out.print("Enter X coordinate: ");
+            col = scan();
+            System.out.print("Enter Y coordinate: ");
+            row = scan();
+
+            guess(col , row);
 
             if (Setup.map.isWin()) {
                 System.out.println("YOU WON");
@@ -34,17 +41,7 @@ public class Game {
         }
     }
 
-
-    public static void guess() {
-
-        Setup.map.printMap();
-
-        int col = -1, row = -1;
-
-        System.out.print("Enter X coordinate: ");
-        col = scan();
-        System.out.print("Enter Y coordinate: ");
-        row = scan();
+    public static void guess(int col, int row) {
 
         if ((col >= 0 && col < Setup.mapLength) && (row >= 0 && row < Setup.mapLength)) {
 
@@ -66,6 +63,9 @@ public class Game {
         } else {
             System.out.println("Invalid location!");
         }
+
+        Setup.map.printMap();
+
     }
 
 

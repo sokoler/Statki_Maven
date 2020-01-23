@@ -30,12 +30,6 @@ public class ShipsTests {
     }
 
     @Test
-    public void failsSetStatus(){
-        squares[5][5].setStatus("OK");
-        assertEquals(squares[5][5].getStatus(),"NO");
-    }
-
-    @Test
     public void testHitShoot() {
 
         squares[6][7].setShip(true);
