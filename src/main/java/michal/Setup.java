@@ -7,7 +7,6 @@ public class Setup {
     private Ship[] ships;
     private int mapLength;
     private Map map;
-    public Validator validator;
 
     private static final List<Direction> VALUES =
             Collections.unmodifiableList(Arrays.asList(Direction.values()));
@@ -75,7 +74,7 @@ public class Setup {
         int counter = 0;
         int normalCounter = 1;
 
-        validator = new Validator(map);
+         Validator validator = new Validator(map);
 
         do {
             for (Ship s : ships) {

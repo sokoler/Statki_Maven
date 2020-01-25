@@ -47,10 +47,8 @@ public class Validator {
             if (row + length >= mapLength) {
                 break;
             }
-            if (row + length < mapLength) {
-                if (map.hasShip(i, col)) {
-                    return true;
-                }
+            if (map.hasShip(i, col)) {
+                return true;
             }
         }
         return false;

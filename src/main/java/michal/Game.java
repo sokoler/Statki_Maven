@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class Game {
 
-    private static int counterOfShots = 0;
-    private static int counterOfMisses = 0;
-    private static int counterOfHits = 0;
+    private int counterOfShots;
+    private int counterOfMisses;
+    private int counterOfHits;
 
-    public int mapLength;
-    public Map map;
+    private int mapLength;
+    private Map map;
     private Setup setup;
     private Ship[] ships;
 
@@ -59,11 +59,10 @@ public class Game {
             if (setup.getMap().isShotHere(row, col)) {
                 System.out.println(" YOU ALREADY HIT HERE !");
             } else if (setup.getMap().hasShip(row, col)) {
-                {
-                    counterOfHits++;
-                    setup.getMap().markHit(row, col);
-                    System.out.println(" YOU HIT AT " + col + "," + row);
-                }
+                counterOfHits++;
+                setup.getMap().markHit(row, col);
+                System.out.println(" YOU HIT AT " + col + "," + row);
+
             } else {
                 counterOfMisses++;
                 setup.getMap().markMiss(row, col);
@@ -75,6 +74,5 @@ public class Game {
         }
 
     }
-
 
 }

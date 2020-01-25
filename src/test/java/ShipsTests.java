@@ -154,7 +154,7 @@ public class ShipsTests {
 
         Game game = new Game();
         game.guess(2, 2, setup);
-        squares[2][2].markMiss();
+
         assertEquals(Status.MISSED, squares[2][2].getStatus());
 
     }
