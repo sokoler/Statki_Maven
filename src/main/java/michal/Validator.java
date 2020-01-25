@@ -3,15 +3,15 @@ package michal;
 
 public class Validator {
 
-    private Map map;
+    private Field field;
 
     private Validator() {
 
         throw new IllegalStateException("Utility class");
     }
 
-    public Validator(Map map) {
-        this.map = map;
+    public Validator(Field field) {
+        this.field = field;
     }
 
     boolean isShipWronglyPlaced(int row, int col, Direction dir, int length, int mapLength) {
@@ -47,7 +47,7 @@ public class Validator {
             if (row + length >= mapLength) {
                 break;
             }
-            if (map.hasShip(i, col)) {
+            if (field.hasShip(i, col)) {
                 return true;
             }
         }
@@ -59,7 +59,7 @@ public class Validator {
             if (col + length >= mapLength) {
                 break;
             }
-            if (map.hasShip(row, i)) {
+            if (field.hasShip(row, i)) {
                 return true;
             }
         }

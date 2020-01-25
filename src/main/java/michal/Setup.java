@@ -6,7 +6,7 @@ public class Setup {
 
     private Ship[] ships;
     private int mapLength;
-    private Map map;
+    private Field field;
 
     private static final List<Direction> VALUES =
             Collections.unmodifiableList(Arrays.asList(Direction.values()));
@@ -17,9 +17,9 @@ public class Setup {
         throw new IllegalStateException("Utility class");
     }
 
-    public Setup(int mapLength, Map map, Ship[] ships) {
+    public Setup(int mapLength, Field field, Ship[] ships) {
         this.mapLength = mapLength;
-        this.map = map;
+        this.field = field;
         this.ships = ships;
     }
 
@@ -50,7 +50,7 @@ public class Setup {
             Ship tempShip = new Ship(shipsLength[i]);
             ships[i] = tempShip;
         }
-        map.setPointsToWin(ships);
+        field.setPointsToWin(ships);
     }
 
     public void setShipsAmount() {
@@ -66,7 +66,7 @@ public class Setup {
             System.out.println("Enter the size of the map (between 10 to 20)");
             mapLength = scan();
         } while (mapLength < 10 || mapLength > 20);
-        map = new Map(mapLength);
+        field = new Field(mapLength);
     }
 
     public void setupShips() {
@@ -74,7 +74,7 @@ public class Setup {
         int counter = 0;
         int normalCounter = 1;
 
-         Validator validator = new Validator(map);
+         Validator validator = new Validator(field);
 
         do {
             for (Ship s : ships) {
@@ -94,7 +94,7 @@ public class Setup {
                 }
                 ships[counter].setLocation(row, col);
                 ships[counter].setDirection(direction);
-                map.addShip(ships[counter]);
+                field.addShip(ships[counter]);
 
                 counter++;
                 normalCounter++;
@@ -111,11 +111,11 @@ public class Setup {
         this.mapLength = mapLength;
     }
 
-    public Map getMap() {
-        return map;
+    public Field getField() {
+        return field;
     }
 
-    public void setMap(Map map) {
-        this.map = map;
+    public void setField(Field field) {
+        this.field = field;
     }
 }

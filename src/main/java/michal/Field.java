@@ -1,12 +1,12 @@
 package michal;
 
-public class Map {
+public class Field {
 
     private Square[][] field;
     private int points;
     private int pointsToWin;
 
-    public Map(int number) {
+    public Field(int number) {
         field = new Square[number][number];
 
         for (int row = 0; row < field.length; row++) {

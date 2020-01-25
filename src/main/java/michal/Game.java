@@ -9,13 +9,13 @@ public class Game {
     private int counterOfHits;
 
     private int mapLength;
-    private Map map;
+    private Field field;
     private Setup setup;
     private Ship[] ships;
 
     public void startApp() {
 
-        setup = new Setup(mapLength, map, ships);
+        setup = new Setup(mapLength, field, ships);
         setup.setupGame();
         checkUserAnswer();
     }
@@ -39,9 +39,9 @@ public class Game {
 
             guess(col, row, setup);
 
-            setup.getMap().printMap();
+            setup.getField().printMap();
 
-            if (setup.getMap().isWin()) {
+            if (setup.getField().isWin()) {
                 System.out.println("YOU WON");
                 System.out.println("\n Number of shots : " + counterOfShots);
                 System.out.println("\n Number of hits : " + counterOfHits);
@@ -56,16 +56,16 @@ public class Game {
         if ((col >= 0 && col < setup.getMapLength()) && (row >= 0 && row < setup.getMapLength())) {
 
             counterOfShots++;
-            if (setup.getMap().isShotHere(row, col)) {
+            if (setup.getField().isShotHere(row, col)) {
                 System.out.println(" YOU ALREADY HIT HERE !");
-            } else if (setup.getMap().hasShip(row, col)) {
+            } else if (setup.getField().hasShip(row, col)) {
                 counterOfHits++;
-                setup.getMap().markHit(row, col);
+                setup.getField().markHit(row, col);
                 System.out.println(" YOU HIT AT " + col + "," + row);
 
             } else {
                 counterOfMisses++;
-                setup.getMap().markMiss(row, col);
+                setup.getField().markMiss(row, col);
                 System.out.println(" YOU MISSED AT " + col + "," + row);
             }
 

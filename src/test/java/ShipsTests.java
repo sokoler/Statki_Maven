@@ -1,31 +1,24 @@
 
 import michal.*;
-import michal.Map;
+import michal.Field;
 import org.junit.Before;
 import org.junit.Test;
 
-
-import java.util.*;
 
 import static org.junit.Assert.*;
 
 public class ShipsTests {
 
     private Square[][] squares;
-    private Map map;
+    private Field field;
     private Setup setup;
     private int points;
     private int shots;
-    private static final List<Direction> VALUES =
-            Collections.unmodifiableList(Arrays.asList(Direction.values()));
-    private static final int SIZE = VALUES.size();
-    private static final Random RANDOM = new Random();
-
 
     @Before
     public void setUp() {
         squares = new Square[10][10];
-        map = new Map(10);
+        field = new Field(10);
 
         for (int row = 0; row < squares.length; row++) {
             for (int col = 0; col < squares[row].length; col++) {
@@ -76,11 +69,11 @@ public class ShipsTests {
 
     @Test
     public void testIsAlreadyShotHere() {
-        map.markHit(3, 3);
-        map.markMiss(5, 5);
+        field.markHit(3, 3);
+        field.markMiss(5, 5);
 
-        assertTrue(map.isShotHere(3, 3));
-        assertTrue(map.isShotHere(5, 5));
+        assertTrue(field.isShotHere(3, 3));
+        assertTrue(field.isShotHere(5, 5));
     }
 
     @Test
@@ -92,9 +85,9 @@ public class ShipsTests {
         ships[0] = tempShip;
         ships[1] = tempShip2;
 
-        map.setPointsToWin(ships);
+        field.setPointsToWin(ships);
 
-        assertEquals(9, map.getPointsToWin());
+        assertEquals(9, field.getPointsToWin());
     }
 
     @Test
@@ -104,7 +97,7 @@ public class ShipsTests {
         int row = 5;
 
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
-            map.markHit(row, col);
+            field.markHit(row, col);
         });
 
     }
@@ -119,11 +112,11 @@ public class ShipsTests {
         ships[0] = tempShip;
         ships[1] = tempShip2;
 
-        setup = new Setup(10, map, ships);
+        setup = new Setup(10, field, ships);
 
         setup.setupShips();
 
-        assertTrue(map.hasShip(1, 2));
+        assertTrue(field.hasShip(1, 2));
 
     }
 
@@ -133,11 +126,11 @@ public class ShipsTests {
         ship.setCol(1);
         ship.setRow(1);
         ship.setDirection(Direction.HORIZONTAL);
-        map.addShip(ship);
+        field.addShip(ship);
 
-        assertTrue(map.hasShip(1, 1));
-        assertTrue(map.hasShip(1, 2));
-        assertTrue(map.hasShip(1, 3));
+        assertTrue(field.hasShip(1, 1));
+        assertTrue(field.hasShip(1, 2));
+        assertTrue(field.hasShip(1, 3));
     }
 
     @Test
@@ -150,12 +143,12 @@ public class ShipsTests {
         ships[0] = tempShip;
         ships[1] = tempShip2;
 
-        setup = new Setup(10, map, ships);
+        setup = new Setup(10, field, ships);
 
         Game game = new Game();
         game.guess(2, 2, setup);
 
-        assertEquals(Status.MISSED, squares[2][2].getStatus());
+        assertEquals(Status.MISSED, field.getMap()[2][2].getStatus());
 
     }
 
@@ -181,7 +174,7 @@ public class ShipsTests {
 
                 ships[counter].setLocation(row, col);
                 ships[counter].setDirection(direction);
-                map.addShip(ships[counter]);
+                field.addShip(ships[counter]);
 
                 counter++;
                 normalCounter++;
@@ -189,9 +182,9 @@ public class ShipsTests {
         }
         while (counter == ships[0].getLength());
 
-        assertTrue(map.hasShip(2, 1));
-        assertTrue(map.hasShip(3, 1));
-        assertTrue(map.hasShip(4, 1));
+        assertTrue(field.hasShip(2, 1));
+        assertTrue(field.hasShip(3, 1));
+        assertTrue(field.hasShip(4, 1));
     }
 
 
