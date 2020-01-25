@@ -2,36 +2,36 @@ package michal;
 
 public class Field {
 
-    private Square[][] field;
+    private Square[][] squares;
     private int points;
     private int pointsToWin;
 
     public Field(int number) {
-        field = new Square[number][number];
+        squares = new Square[number][number];
 
-        for (int row = 0; row < field.length; row++) {
-            for (int col = 0; col < field[row].length; col++) {
+        for (int row = 0; row < squares.length; row++) {
+            for (int col = 0; col < squares[row].length; col++) {
                 Square temp = new Square();
-                field[row][col] = temp;
+                squares[row][col] = temp;
             }
         }
     }
 
     public boolean isShotHere(int row, int col) {
-        return field[row][col].getStatus() == Status.HIT || field[row][col].getStatus() == Status.MISSED;
+        return squares[row][col].getStatus() == Status.HIT || squares[row][col].getStatus() == Status.MISSED;
     }
 
     public void markHit(int row, int col) {
-        field[row][col].markHit();
+        squares[row][col].markHit();
         points++;
     }
 
     public void markMiss(int row, int col) {
-        field[row][col].markMiss();
+        squares[row][col].markMiss();
     }
 
     public boolean hasShip(int row, int col) {
-        return field[row][col].isShip();
+        return squares[row][col].isShip();
     }
 
     public void addShip(Ship s) {
@@ -42,11 +42,11 @@ public class Field {
 
         if (direction == Direction.HORIZONTAL) {
             for (int i = col; i < col + length; i++) {
-                field[row][i].setShip(true);
+                squares[row][i].setShip(true);
             }
         } else if (direction == Direction.VERTICAL) {
             for (int i = row; i < row + length; i++) {
-                field[i][col].setShip(true);
+                squares[i][col].setShip(true);
             }
         }
     }
@@ -67,18 +67,18 @@ public class Field {
     public void printMap() {
 
         System.out.println();
-        for (int i = 0; i < field.length; i++)
+        for (int i = 0; i < squares.length; i++)
             System.out.print("  " + i);
         System.out.println();
 
-        for (int x = 0; x < field.length; x++) {
+        for (int x = 0; x < squares.length; x++) {
             if (x <= 9)
                 System.out.print(" " + x);
             else
                 System.out.print(x);
 
-            for (int y = 0; y < field[x].length; y++) {
-                System.out.print(field[x][y]);
+            for (int y = 0; y < squares[x].length; y++) {
+                System.out.print(squares[x][y]);
             }
             System.out.println(x);
         }
@@ -88,11 +88,12 @@ public class Field {
         return pointsToWin;
     }
 
-    public Square[][] getMap() {
-        return field;
+    public Square[][] getSquares() {
+        return squares;
     }
 
-    public void setMap(Square[][] map) {
-        this.field = map;
+    public void setSquares(Square[][] squares) {
+        this.squares = squares;
     }
+
 }

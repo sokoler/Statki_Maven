@@ -148,7 +148,7 @@ public class ShipsTests {
         Game game = new Game();
         game.guess(2, 2, setup);
 
-        assertEquals(Status.MISSED, field.getMap()[2][2].getStatus());
+        assertEquals(Status.MISSED, field.getSquares()[2][2].getStatus());
 
     }
 

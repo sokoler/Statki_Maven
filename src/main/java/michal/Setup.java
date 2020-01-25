@@ -5,7 +5,7 @@ import java.util.*;
 public class Setup {
 
     private Ship[] ships;
-    private int mapLength;
+    private int fieldLength;
     private Field field;
 
     private static final List<Direction> VALUES =
@@ -18,7 +18,7 @@ public class Setup {
     }
 
     public Setup(int mapLength, Field field, Ship[] ships) {
-        this.mapLength = mapLength;
+        this.fieldLength = mapLength;
         this.field = field;
         this.ships = ships;
     }
@@ -64,9 +64,9 @@ public class Setup {
 
         do {
             System.out.println("Enter the size of the map (between 10 to 20)");
-            mapLength = scan();
-        } while (mapLength < 10 || mapLength > 20);
-        field = new Field(mapLength);
+            fieldLength = scan();
+        } while (fieldLength < 10 || fieldLength > 20);
+        field = new Field(fieldLength);
     }
 
     public void setupShips() {
@@ -82,14 +82,14 @@ public class Setup {
 
                 int length = ships[counter].getLength();
 
-                int row = RANDOM.nextInt(mapLength);
-                int col = RANDOM.nextInt(mapLength);
+                int row = RANDOM.nextInt(fieldLength);
+                int col = RANDOM.nextInt(fieldLength);
                 Direction direction = VALUES.get(RANDOM.nextInt(SIZE));
 
-                while (validator.isShipWronglyPlaced(row, col, direction, length, mapLength)) {
+                while (validator.isShipWronglyPlaced(row, col, direction, length, fieldLength)) {
 
-                    row = RANDOM.nextInt(mapLength);
-                    col = RANDOM.nextInt(mapLength);
+                    row = RANDOM.nextInt(fieldLength);
+                    col = RANDOM.nextInt(fieldLength);
 
                 }
                 ships[counter].setLocation(row, col);
@@ -103,12 +103,12 @@ public class Setup {
         while (counter == ships.length - 1);
     }
 
-    public int getMapLength() {
-        return mapLength;
+    public int getFieldLength() {
+        return fieldLength;
     }
 
-    public void setMapLength(int mapLength) {
-        this.mapLength = mapLength;
+    public void setFieldLength(int mapLength) {
+        this.fieldLength = mapLength;
     }
 
     public Field getField() {

@@ -53,7 +53,7 @@ public class Game {
 
     public void guess(int col, int row, Setup setup) {
 
-        if ((col >= 0 && col < setup.getMapLength()) && (row >= 0 && row < setup.getMapLength())) {
+        if ((col >= 0 && col < setup.getFieldLength()) && (row >= 0 && row < setup.getFieldLength())) {
 
             counterOfShots++;
             if (setup.getField().isShotHere(row, col)) {
